@@ -43,6 +43,9 @@ jobs:
         distribution: temurin
         java-version: 11
         cache: 'maven'
+    - name: Submit Maven Dependency Snapshot
+      if: ${{ matrix.language == 'java' }}
+      uses: advanced-security/maven-dependency-submission-action@v3
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
