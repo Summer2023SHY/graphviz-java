@@ -63,4 +63,4 @@ jobs:
       with:
         report_paths: "**/TEST-*.xml"
         exclude_sources: target/
-        check_name: Test Results - ${{ matrix.os.name }}
+        check_name: Test Results - ${{ matrix.os.name }} (${{ matrix.jdk.name }})
