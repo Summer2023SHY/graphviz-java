@@ -52,9 +52,11 @@ jobs:
     - name: Run Maven Install
       run: |
         mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V "$@"
+      shell: bash
     - name: Run Test
       run: |
         mvn test -B "$@"
+      shell: bash
     - name: Publish Test Results
       if: ${{ always() }}
       uses: mikepenz/action-junit-report@v3
