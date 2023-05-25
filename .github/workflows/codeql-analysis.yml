@@ -23,6 +23,8 @@ on:
 permissions:
   actions: read
   contents: write
+  security-events: write
+  pull-requests: read
 
 jobs:
   analyze:
