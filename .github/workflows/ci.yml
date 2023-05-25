@@ -61,6 +61,8 @@ jobs:
       if: ${{ always() }}
       uses: mikepenz/action-junit-report@v3
       with:
+        require_tests: true
+        fail_on_failure: true
         report_paths: "**/TEST-*.xml"
         exclude_sources: target/
         check_name: Test Results - ${{ matrix.os.name }} (${{ matrix.jdk.name }})
