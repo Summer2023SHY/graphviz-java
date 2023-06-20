@@ -17,22 +17,47 @@ package guru.nidi.graphviz.model;
 
 import guru.nidi.graphviz.attribute.*;
 
+/**
+ * Provides factory methods for creating various Graphviz elements.
+ */
 public final class Factory {
     private Factory() {
     }
 
+    /**
+     * Creates a new immutable graph.
+     * @return an immutable graph
+     */
     public static Graph graph() {
         return graph("");
     }
 
+    /**
+     * Creates a new immutable graph with the specified name.
+     * 
+     * @param name the name for the graph
+     * @return an immutable graph with the specified name
+     */
     public static Graph graph(String name) {
         return new ImmutableGraph().named(name);
     }
 
+    /**
+     * Creates a new immutable node with the specified name.
+     * 
+     * @param name the name for the node
+     * @return an immutable node with the specified name
+     */
     public static Node node(String name) {
         return node(Label.of(name));
     }
 
+    /**
+     * Creates a new immutable node with the specified name.
+     * 
+     * @param name the name for the node
+     * @return an immutable node with the specified name
+     */
     public static Node node(Label name) {
         return CreationContext.createNode(name);
     }
@@ -50,18 +75,40 @@ public final class Factory {
     }
 
 
+    /**
+     * Creates a new mutable graph.
+     * @return a mutable graph
+     */
     public static MutableGraph mutGraph() {
         return CreationContext.createMutGraph();
     }
 
+    /**
+     * Creates a new mutable graph with the specified name.
+     * 
+     * @param name the name for the graph
+     * @return a mutable graph with the specified name
+     */
     public static MutableGraph mutGraph(String name) {
         return mutGraph().setName(name);
     }
 
+    /**
+     * Creates a new mutable node with the specified name.
+     * 
+     * @param name the name for the node
+     * @return an mutable node with the specified name
+     */
     public static MutableNode mutNode(String name) {
         return mutNode(name, false);
     }
 
+    /**
+     * Creates a new mutable node with the specified name.
+     * 
+     * @param name the name for the node
+     * @return an mutable node with the specified name
+     */
     public static MutableNode mutNode(String name, boolean raw) {
         return mutNode(raw ? Label.raw(name) : Label.of(name));
     }
