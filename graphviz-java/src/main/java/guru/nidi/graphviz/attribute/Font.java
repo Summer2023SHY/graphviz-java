@@ -26,10 +26,26 @@ public final class Font {
         return attrs(name(name), size(size));
     }
 
+    /**
+     * Specifies the font used for text.
+     * 
+     * @param name name of font
+     * @return attribute representing the specified font
+     * 
+     * @see <a href="https://graphviz.org/docs/attrs/fontname/">fontname</a>
+     */
     public static Attributes<ForAll> name(String name) {
         return attr("fontname", name);
     }
 
+    /**
+     * Specifies the font size used for text.
+     * 
+     * @param name font size, in points
+     * @return attribute representing the specified font size
+     * 
+     * @see <a href="https://graphviz.org/docs/attrs/fontsize/">fontsize</a>
+     */
     public static Attributes<ForAll> size(int size) {
         return attr("fontsize", size);
     }
