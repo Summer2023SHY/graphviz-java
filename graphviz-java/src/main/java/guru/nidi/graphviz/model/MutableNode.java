@@ -24,6 +24,9 @@ import static guru.nidi.graphviz.model.Factory.mutNode;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
+/**
+ * A mutable node implementation.
+ */
 public class MutableNode implements MutableAttributed<MutableNode, ForNode>, LinkSource, LinkTarget {
     private static final SafeRecursion<MutableNode> RECURSION = new SafeRecursion<>();
     protected Label name;
@@ -41,10 +44,21 @@ public class MutableNode implements MutableAttributed<MutableNode, ForNode>, Lin
         setName(name);
     }
 
+    /**
+     * Creates and returns a copy of this node.
+     * 
+     * @return a copy of this node
+     */
     public MutableNode copy() {
         return new MutableNode(name, links, attributes.copy());
     }
 
+    /**
+     * Sets the name of this node.
+     * 
+     * @param name a name for this node
+     * @return this node
+     */
     public final MutableNode setName(Label name) {
         this.name = name;
         if (name.isExternal()) {
@@ -56,6 +70,12 @@ public class MutableNode implements MutableAttributed<MutableNode, ForNode>, Lin
         return this;
     }
 
+    /**
+     * Sets the name of this node.
+     * 
+     * @param name a name for this node
+     * @return this node
+     */
     public MutableNode setName(String name) {
         return setName(Label.of(name));
     }
@@ -167,6 +187,11 @@ public class MutableNode implements MutableAttributed<MutableNode, ForNode>, Lin
         throw new IllegalStateException("Unexpected element " + link.from + " in link");
     }
 
+    /**
+     * Returns the name of this node.
+     * 
+     * @return name of this node
+     */
     public Label name() {
         return name;
     }

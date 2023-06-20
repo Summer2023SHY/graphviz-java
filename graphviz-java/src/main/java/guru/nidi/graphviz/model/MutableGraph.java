@@ -23,15 +23,22 @@ import java.util.Map.Entry;
 
 import static java.util.Arrays.asList;
 
+/**
+ * A mutable graph implementation.
+ */
 public class MutableGraph implements LinkSource, LinkTarget {
     private static final SafeRecursion<MutableGraph> RECURSION = new SafeRecursion<>();
     private static final String CONTEXT = "$context";
 
     protected boolean strict;
+    /** Whether this graph is a directed graph */
     protected boolean directed;
     protected boolean cluster;
+    /** Name of this graph. */
     protected Label name;
+    /** Nodes stored in this graph. */
     protected final Set<MutableNode> nodes;
+    /** Subgraphs of this graph. */
     protected final Set<MutableGraph> subgraphs;
     protected final LinkList links;
     protected final MutableAttributed<MutableGraph, ForNode> nodeAttrs;
@@ -61,12 +68,22 @@ public class MutableGraph implements LinkSource, LinkTarget {
         this.graphAttrs = new SimpleMutableAttributed<>(this, graphAttrs);
     }
 
+    /**
+     * Creates and returns a copy of this graph.
+     * 
+     * @return a copy of this graph.
+     */
     public MutableGraph copy() {
         return new MutableGraph(strict, directed, cluster, name,
                 new LinkedHashSet<>(nodes), new LinkedHashSet<>(subgraphs), links,
                 nodeAttrs, linkAttrs, graphAttrs);
     }
 
+    /**
+     * Returns an immutable view of this graph.
+     * 
+     * @return an immmutable view of this graph
+     */
     public Graph toImmutable() {
         return ImmutableGraph.copyOfMut(this);
     }
@@ -105,6 +122,12 @@ public class MutableGraph implements LinkSource, LinkTarget {
         return this;
     }
 
+    /**
+     * Sets the name of this graph.
+     * 
+     * @param name a name for this graph
+     * @return this graph
+     */
     public MutableGraph setName(String name) {
         this.name = Label.of(name);
         return this;
@@ -172,6 +195,11 @@ public class MutableGraph implements LinkSource, LinkTarget {
         return collectNodes(new HashSet<>(), new HashSet<>()).getKey();
     }
 
+    /**
+     * Returns subgraphs of this graph.
+     * 
+     * @return subgraphs of this graph
+     */
     public Collection<MutableGraph> graphs() {
         return subgraphs;
     }
@@ -184,6 +212,11 @@ public class MutableGraph implements LinkSource, LinkTarget {
         return links;
     }
 
+    /**
+     * Returns edges of this graph.
+     * 
+     * @return edges of this graph
+     */
     public Collection<Link> edges() {
         return collectNodes(new HashSet<>(), new HashSet<>()).getValue();
     }
@@ -220,6 +253,11 @@ public class MutableGraph implements LinkSource, LinkTarget {
         return strict;
     }
 
+    /**
+     * Checks whether this graph is directed.
+     * 
+     * @return {@code true} if this graph is directed
+     */
     public boolean isDirected() {
         return directed;
     }
@@ -228,6 +266,11 @@ public class MutableGraph implements LinkSource, LinkTarget {
         return cluster;
     }
 
+    /**
+     * Returns the name of this graph.
+     * 
+     * @return name of this graph
+     */
     public Label name() {
         return name;
     }
