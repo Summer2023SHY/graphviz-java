@@ -19,7 +19,7 @@ import guru.nidi.graphviz.attribute.Font;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.attribute.*;
 import guru.nidi.graphviz.engine.Graphviz;
-import guru.nidi.graphviz.engine.GraphvizV8Engine;
+import guru.nidi.graphviz.engine.GraphvizJdkEngine;
 import guru.nidi.graphviz.model.MutableGraph;
 
 import java.awt.*;
@@ -58,7 +58,7 @@ public final class FontTools {
     }
 
     public static void main(String[] args) throws IOException {
-        Graphviz.useEngine(new GraphvizV8Engine());
+        Graphviz.useEngine(new GraphvizJdkEngine());
         System.out.println("Available fonts: " + availableFontNames());
         final String fontShow = "font-show.png";
         System.out.println("Creating image with all fonts '" + fontShow + "'.");

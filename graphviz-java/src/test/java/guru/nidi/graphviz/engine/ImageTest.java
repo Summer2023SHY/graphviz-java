@@ -35,7 +35,7 @@ class ImageTest {
     void init(RepetitionInfo info) {
         //on CI we don't have dot installed
         if (info.getCurrentRepetition() == 1 || System.getenv("CI") != null) {
-            Graphviz.useEngine(new GraphvizV8Engine());
+            Graphviz.useEngine(new GraphvizJdkEngine());
         } else {
             Graphviz.useEngine(new GraphvizCmdLineEngine());
         }

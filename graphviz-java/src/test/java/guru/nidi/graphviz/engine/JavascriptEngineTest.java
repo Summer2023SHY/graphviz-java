@@ -48,16 +48,6 @@ class JavascriptEngineTest {
         });
     }
 
-    @Test
-    void v8() {
-        final V8JavascriptEngine e = new V8JavascriptEngine();
-        final V8JavascriptEngine f = new V8JavascriptEngine();
-        e.executeJavascript("a='42'");
-        f.executeJavascript("a='hula'");
-        assertEquals("42", e.executeJavascript("result(a) //", "", ""));
-        assertEquals("hula", f.executeJavascript("result(a) //", "", ""));
-    }
-
     @ParameterizedTest
     @MethodSource
     void threading(Supplier<JavascriptEngine> engineSupplier) throws InterruptedException, ExecutionException {
@@ -78,6 +68,6 @@ class JavascriptEngineTest {
     }
 
     static List<Supplier<JavascriptEngine>> threading() {
-        return asList(JdkJavascriptEngine::new, V8JavascriptEngine::new);
+        return asList(JdkJavascriptEngine::new);
     }
 }

@@ -44,23 +44,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-            <artifactId>j2v8_macosx_x86_64</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-            <artifactId>j2v8_linux_x86_64</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-            <artifactId>j2v8_win32_x86_64</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-            <artifactId>j2v8_win32_x86</artifactId>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
             <optional>true</optional>
         </dependency>
 

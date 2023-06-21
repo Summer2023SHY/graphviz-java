@@ -75,6 +75,10 @@
         </dependency>
         <!-- Only needed for Nashorn Javascript Engine -->
         <dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>net.arnx</groupId>
             <artifactId>nashorn-promise</artifactId>
         </dependency>
@@ -124,70 +128,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>macos</id>
-            <activation>
-                <os>
-                    <name>mac os x</name>
-                </os>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                    <artifactId>j2v8_macosx_x86_64</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>linux</id>
-            <activation>
-                <os>
-                    <name>linux</name>
-                </os>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                    <artifactId>j2v8_linux_x86_64</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>win32</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>x86</arch>
-                </os>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                    <artifactId>j2v8_win32_x86</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>win64</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                    <artifactId>j2v8_win32_x86_64</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 
 </project>

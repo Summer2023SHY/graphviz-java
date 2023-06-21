@@ -39,7 +39,7 @@ public class Roughifyer implements GraphvizPostProcessor {
     private final Map<String, Object> options;
 
     public Roughifyer() {
-        this(new V8JavascriptEngine());
+        this(new JdkJavascriptEngine());
     }
 
     public Roughifyer(JavascriptEngine engine) {

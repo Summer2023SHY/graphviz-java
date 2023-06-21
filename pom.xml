@@ -21,15 +21,12 @@
     <properties>
         <suppressionFile>owasp-suppression.xml</suppressionFile>
         <dependency-check.fail-on-error>false</dependency-check.fail-on-error>
-        <java.version>1.8</java.version>
-        <j2v8.version>4.6.0</j2v8.version>
-        <j2v8-linux.version>4.6.0</j2v8-linux.version>
+        <java.version>11</java.version>
     </properties>
 
     <modules>
         <module>graphviz-java</module>
         <module>graphviz-java-min-deps</module>
-        <module>graphviz-java-all-j2v8</module>
         <module>graphviz-rough</module>
         <module>graphviz-kotlin</module>
     </modules>
@@ -80,28 +77,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                <artifactId>j2v8_macosx_x86_64</artifactId>
-                <version>${j2v8.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                <artifactId>j2v8_linux_x86_64</artifactId>
-                <version>${j2v8-linux.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                <artifactId>j2v8_win32_x86_64</artifactId>
-                <version>${j2v8.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
-                <artifactId>j2v8_win32_x86</artifactId>
-                <version>${j2v8.version}</version>
-                <scope>runtime</scope>
+                <groupId>org.openjdk.nashorn</groupId>
+                <artifactId>nashorn-core</artifactId>
+                <version>15.4</version>
             </dependency>
 
             <dependency>

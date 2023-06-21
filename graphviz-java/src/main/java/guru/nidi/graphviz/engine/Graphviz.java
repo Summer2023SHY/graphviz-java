@@ -92,9 +92,6 @@ public final class Graphviz {
                 if (GraphvizCmdLineEngine.AVAILABLE) {
                     availableEngines.add(new GraphvizCmdLineEngine());
                 }
-                if (GraphvizV8Engine.AVAILABLE) {
-                    availableEngines.add(new GraphvizV8Engine());
-                }
                 if (GraphvizJdkEngine.AVAILABLE) {
                     availableEngines.add(new GraphvizJdkEngine());
                 }

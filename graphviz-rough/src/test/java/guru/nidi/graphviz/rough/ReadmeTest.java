@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ReadmeTest {
     @BeforeAll
     static void init() {
-        Graphviz.useEngine(new GraphvizV8Engine());
+        Graphviz.useEngine(new GraphvizJdkEngine());
     }
 
     @Test
