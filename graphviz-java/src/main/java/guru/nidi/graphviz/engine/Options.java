@@ -81,6 +81,12 @@ public final class Options {
         return new Options(Engine.DOT, Format.SVG, null, null, new File("."), new ArrayList<>());
     }
 
+    /**
+     * Loads in options from a JSON string
+     * 
+     * @param json a JSON string
+     * @return a new{@code Options} instance with the specified values
+     */
     public static Options fromJson(String json) {
         final Matcher format = FORMAT.matcher(json);
         format.find();

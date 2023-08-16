@@ -23,12 +23,24 @@ import java.util.function.Consumer;
 
 import static guru.nidi.graphviz.engine.GraphvizLoader.isOnClasspath;
 
+/**
+ * The rasterizer being used for image generation.
+ */
 public interface Rasterizer {
+    /** The no-op rasterizer. */
     Rasterizer NONE = new NopRasterizer();
+    /** The Apache Batik-based rasterizer. */
     Rasterizer BATIK = isOnClasspath("org/apache/batik/transcoder/Transcoder.class") ? new BatikRasterizer() : NONE;
+    /** The Salamander-based rasterizer. */
     Rasterizer SALAMANDER = isOnClasspath("com/kitfox/svg/SVGDiagram.class") ? new SalamanderRasterizer() : NONE;
+    /** The default rasterizer. */
     Rasterizer DEFAULT = getDefault();
 
+    /**
+     * Returns the default rasterizer.
+     * 
+     * @return the default rasterizer
+     */
     static Rasterizer getDefault() {
         final Rasterizer r = BATIK != NONE ? BATIK : SALAMANDER;
         if (r == NONE) {

@@ -36,6 +36,10 @@ import static java.lang.Double.parseDouble;
 import static java.util.Arrays.asList;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
+/**
+ * The main interface for interacting with Graphviz instances.
+ * All instances of this class are immutable.
+ */
 public final class Graphviz {
     static {
         if (System.getProperty("java.awt.headless") == null) {
@@ -196,29 +200,66 @@ public final class Graphviz {
         System.setProperty("java.awt.headless", "false");
     }
 
+    /**
+     * Instantiates a new {@code Graphviz} instance with the specified file.
+     * 
+     * @param src the input file
+     * @return a new {@code Graphviz} instance
+     * @throws IOException if an I/O error occurs
+     */
     public static Graphviz fromFile(File src) throws IOException {
         try (final InputStream in = new FileInputStream(src)) {
             return fromString(readAsString(in)).basedir(src.getAbsoluteFile().getParentFile());
         }
     }
 
+    /**
+     * Instantiates a new {@code Graphviz} instance with the specified immutable graph.
+     * 
+     * @param graph an immutable graph
+     * @return a new {@code Graphviz} instance
+     */
     public static Graphviz fromGraph(Graph graph) {
         return fromGraph((MutableGraph) graph);
     }
 
+    /**
+     * Instantiates a new {@code Graphviz} instance with the specified mutable graph.
+     * 
+     * @param graph a mutable graph
+     * @return a new {@code Graphviz} instance
+     */
     public static Graphviz fromGraph(MutableGraph graph) {
         return new Graphviz(graph, null, new ProcessOptions());
     }
 
+    /**
+     * Instantiates a new {@code Graphviz} instance with the string representation of the input.
+     * 
+     * @param graph the string representation of an input to Graphviz
+     * @return a new {@code Graphviz} instance
+     */
     public static Graphviz fromString(String src) {
         return new Graphviz(null, src, new ProcessOptions().dpi(dpi(src)));
     }
 
+    /**
+     * Specifies the engine to use.
+     * 
+     * @param engine the engine to use
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz engine(Engine engine) {
         return new Graphviz(
                 graph, src, rasterizer, processOptions, options.engine(engine), processors, messageConsumer);
     }
 
+    /**
+     * Specifies the total memory to allocate
+     * 
+     * @param totalMemory the total memory to allocate
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz totalMemory(@Nullable Integer totalMemory) {
         final Options opts = options.totalMemory(totalMemory);
         return new Graphviz(graph, src, rasterizer, processOptions, opts, processors, messageConsumer);
@@ -234,10 +275,22 @@ public final class Graphviz {
         return new Graphviz(graph, src, rasterizer, processOptions, opts, processors, messageConsumer);
     }
 
+    /**
+     * Specifies the width of the output image.
+     * 
+     * @param width the new width
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz width(int width) {
         return new Graphviz(graph, src, rasterizer, processOptions.width(width), options, processors, messageConsumer);
     }
 
+    /**
+     * Specifies the height of the output image.
+     * 
+     * @param width the new height
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz height(int height) {
         return new Graphviz(
                 graph, src, rasterizer, processOptions.height(height), options, processors, messageConsumer);
@@ -247,14 +300,32 @@ public final class Graphviz {
         return new Graphviz(graph, src, rasterizer, processOptions.scale(scale), options, processors, messageConsumer);
     }
 
+    /**
+     * Adds a new pre-processor.
+     * 
+     * @param preProcessor the pre-processor to add
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz preProcessor(GraphvizPreProcessor preProcessor) {
         return processor(preProcessor);
     }
 
+    /**
+     * Adds a new post processor.
+     * 
+     * @param postProcessor the post processor to add
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz postProcessor(GraphvizPostProcessor postProcessor) {
         return processor(postProcessor);
     }
 
+    /**
+     * Adds a new processor.
+     * 
+     * @param processor the processor to add
+     * @return the modified {@code Graphviz} instance
+     */
     public Graphviz processor(GraphvizProcessor processor) {
         final ArrayList<GraphvizProcessor> ps = new ArrayList<>(processors);
         ps.add(processor);
@@ -269,6 +340,14 @@ public final class Graphviz {
         return new Graphviz(graph, src, rasterizer, processOptions, options, processors, messageConsumer);
     }
 
+    /**
+     * Rasterizes the underlying graph with the specified rasterizer.
+     * 
+     * @param rasterizer the rasterizer to use
+     * @return the rasterizing renderer
+     * 
+     * @throws IllegalArgumentException if argument is {@link Rasterizer#NONE}
+     */
     public Renderer rasterize(Rasterizer rasterizer) {
         if (rasterizer == NONE) {
             throw new IllegalArgumentException("The provided rasterizer implementation was not found."
@@ -280,6 +359,12 @@ public final class Graphviz {
         return new Renderer(g, Format.PNG);
     }
 
+    /**
+     * Renders the underlying graph as the specified format.
+     * 
+     * @param format the format to render the graph
+     * @return the renderer being used
+     */
     public Renderer render(Format format) {
         final Options opts = options.format(format);
         final Graphviz g = new Graphviz(graph, src, rasterizer, processOptions, opts, processors, messageConsumer);
