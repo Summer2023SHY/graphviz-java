@@ -33,7 +33,6 @@ import static guru.nidi.graphviz.model.Link.to;
 public class PerformanceTest {
     public static void main(String[] args) {
         final long a = System.nanoTime();
-//        Graphviz.useEngine(new GraphvizV8Engine());
         Graphviz.useEngine(new GraphvizJdkEngine());
         Graphviz.fromString("graph {a--b}").render(SVG).toString();
         final long b = System.nanoTime();
