@@ -55,14 +55,27 @@ Instead of `graphviz-java` there are two alternative dependencies that can be us
     All other dependencies are marked as `optional` and must added manually. See the [pom.xml](graphviz-java-min-deps/pom.xml#L64-L90) for details.
     
 Instead of `J2V8`, one can also use the JDK javascript engine Nashorn.
-If Nashorn is too slow or on JDK version 15 or newer (where Nashorn has been removed),
-the graal [javascript](https://github.com/graalvm/graaljs) engine is a third option.
-It needs this additional dependency:
+To use Nashorn on JDK 15 or newer (where Nashorn has been removed),
+the [standalone version of Nashorn](https://github.com/openjdk/nashorn)
+needs to be included as a dependency:
+
+```xml
+<dependency>
+    <groupId>org.openjdk.nashorn</groupId>
+    <artifactId>nashorn-core</artifactId>
+    <version>15.4</version>
+</dependency>
+```
+
+If Nashorn is too slow, the graal [javascript](https://github.com/graalvm/graaljs)
+engine is a third option.It needs this additional dependency:
+
 ```xml
 <dependency>
     <groupId>org.graalvm.js</groupId>
     <artifactId>js</artifactId>
-    <version>20.0.0</version>
+    <version>22.3.3</version>
+    <!-- Use Graal JS 21.3.3 if you are using JDK 8. -->
 </dependency>
 ```
  

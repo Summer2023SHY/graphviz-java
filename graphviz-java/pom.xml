@@ -56,13 +56,6 @@
     </build>
 
     <dependencies>
-        <!-- Only needed for Graal Javascript engine -->
-        <dependency>
-            <groupId>org.graalvm.js</groupId>
-            <artifactId>js</artifactId>
-            <version>22.3.2</version>
-            <optional>true</optional>
-        </dependency>
         <!-- Only needed for Javascript Graphviz Engines -->
         <dependency>
             <groupId>org.webjars.npm</groupId>
@@ -185,6 +178,52 @@
                     <groupId>guru.nidi.com.eclipsesource.j2v8</groupId>
                     <artifactId>j2v8_win32_x86_64</artifactId>
                     <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>nashorn-standalone</id>
+            <activation>
+                <jdk>[11,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjdk.nashorn</groupId>
+                    <artifactId>nashorn-core</artifactId>
+                    <scope>runtime</scope>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <!-- Only needed for Graal Javascript engine in JDK 8
+            The latest version of Graal Javascript engine that supports
+            JDK 8 is 21.3.3 -->
+            <id>graalvm-jdk8</id>
+            <activation>
+                <jdk>[1.8,11)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.graalvm.js</groupId>
+                    <artifactId>js</artifactId>
+                    <version>21.3.3</version>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <!-- Only needed for Graal Javascript engine in JDK 11+ -->
+            <id>graalvm-jdk11</id>
+            <activation>
+                <jdk>[11,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.graalvm.js</groupId>
+                    <artifactId>js</artifactId>
+                    <version>22.3.3</version>
+                    <optional>true</optional>
                 </dependency>
             </dependencies>
         </profile>
