@@ -33,8 +33,12 @@ jobs:
         - name: Ubuntu
           tag: ubuntu-latest
         jdk:
+        - name: JDK 8
+          version: '8'
         - name: JDK 11
           version: '11'
+        - name: JDK 17
+          version: '17'
     name: CI (${{ matrix.os.name }} - ${{ matrix.jdk.name }})
     if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ${{ matrix.os.tag }}
