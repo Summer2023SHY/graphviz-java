@@ -60,7 +60,7 @@
             <!-- Only needed for Graal Javascript engine -->
             <groupId>org.graalvm.js</groupId>
             <artifactId>js</artifactId>
-            <version>22.3.3</version>
+            <version>23.0.1</version>
             <optional>true</optional>
         </dependency>
         <!-- Only needed for Javascript Graphviz Engines -->
