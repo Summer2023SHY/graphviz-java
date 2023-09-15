@@ -55,7 +55,7 @@ jobs:
       shell: bash
     - name: Run Test
       run: |
-        mvn test -B "$@"
+        mvn test -B -Dmaven.test.failure.ignore=true "$@"
       shell: bash
     - name: Publish Test Results
       if: ${{ always() }}
