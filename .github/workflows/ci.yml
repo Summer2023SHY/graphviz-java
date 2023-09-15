@@ -33,8 +33,6 @@ jobs:
         - name: Ubuntu
           tag: ubuntu-latest
         jdk:
-        - name: JDK 8
-          version: '8'
         - name: JDK 11
           version: '11'
         - name: JDK 17
