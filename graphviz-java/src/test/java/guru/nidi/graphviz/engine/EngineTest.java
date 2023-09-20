@@ -50,7 +50,7 @@ import static org.hamcrest.core.Every.everyItem;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 
@@ -242,7 +242,7 @@ class EngineTest {
     private CommandLineExecutor fileCommandExecutor() throws IOException, InterruptedException {
         final CommandLineExecutor cmdExecutor = mock(CommandLineExecutor.class);
         doAnswer(invocation -> {
-            final File workingDirectory = invocation.getArgumentAt(1, File.class);
+            final File workingDirectory = invocation.getArgument(1);
             final File svgInput = new File(getClass().getClassLoader().getResource("outfile1.svg").getFile());
             final File svgOutput = new File(workingDirectory.getAbsolutePath() + "/outfile.svg");
             Files.copy(svgInput.toPath(), svgOutput.toPath());
@@ -254,9 +254,9 @@ class EngineTest {
     private CommandLineExecutor argumentsCommandExecutor() throws IOException, InterruptedException {
         final CommandLineExecutor cmdExecutor = mock(CommandLineExecutor.class);
         doAnswer(invocation -> {
-            final File workingDirectory = invocation.getArgumentAt(1, File.class);
+            final File workingDirectory = invocation.getArgument(1, File.class);
             try (final Writer out = new OutputStreamWriter(new FileOutputStream(new File(workingDirectory.getAbsolutePath() + "/outfile.svg")), UTF_8)) {
-                out.write(Arrays.toString(invocation.getArgumentAt(0, CommandLine.class).getArguments()));
+                out.write(Arrays.toString(invocation.getArgument(0, CommandLine.class).getArguments()));
             }
             return null;
         }).when(cmdExecutor).execute(any(CommandLine.class), any(File.class), any(Integer.class));
